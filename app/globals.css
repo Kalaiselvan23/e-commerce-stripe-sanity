@@ -1,27 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body{
+    @apply bg-[#1B1C26]
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.stock::before
+{
+    content:"";
+    height:1rem;
+    width:1rem;
+    background-color:orange;
+    border-radius: 50%;
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.btn-grp
+{
+    @apply border-2 border-gray-600 text-gray-400 p-2 text-2xl rounded-md hover:bg-blue-400 hover:text-white transition-all duration-300
+}
+.count-btn
+{
+    @apply p-2 text-xl
 }
