@@ -1,10 +1,13 @@
 'use client'
-import React, { useState } from 'react'
+import { CartContext, cartContextType } from '@/app/contexts/CartContext';
+import React, { useContext, useState } from 'react'
 
-const ButtonCounter = () => {
+const ButtonCounter = ({product}:ProductType) => {
     const [count,setCount]=useState(0);
+    const {cartItems,setCartItems}=useContext(CartContext) as cartContextType
     const handleCartBtn=()=>{
-        console.log("ITEM ADDED");
+        console.log(cartItems)
+       setCartItems((prev)=>[...prev,product])
     }
   return (
     <div>

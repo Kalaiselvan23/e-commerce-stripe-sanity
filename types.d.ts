@@ -13,4 +13,11 @@ type ProductType={
     name:string,
     sale:boolean,
     details:string,
+    reviews:{
+        name:string,
+        title:string,
+        email:string,
+        description:string,
+        _createdAt:string,
+    }[],
 }

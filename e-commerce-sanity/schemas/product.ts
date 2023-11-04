@@ -59,6 +59,6 @@ export default defineType({
             title:"Sale",
             type:"boolean",
             description:"Select whether the product is in sale or not"
-        })
+        }),
     ]
 })

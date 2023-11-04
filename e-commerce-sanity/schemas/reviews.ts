@@ -1,7 +1,7 @@
 import { defineType,defineField } from "sanity";
 export default defineType({
-    name:"comments",
-    title:"Comments",
+    name:"reviews",
+    title:"Reviews",
     type:"document",
     fields:[
         defineField({
@@ -29,6 +29,12 @@ export default defineType({
             title:"Product",
             type:'reference',
             to:[{type:"product"}]
+        }),
+        defineField({
+            name:"approved",
+            title:"Comment Approval",
+            type:"boolean",
+            description:"This comment will be shown only if approved",
         })
     ]
 })

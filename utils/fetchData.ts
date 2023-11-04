@@ -2,7 +2,11 @@ const baseUrl=`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.i
 const fetchData=async(query:string)=>{
     let QUERY = encodeURIComponent(query);
     const url=`${baseUrl}?query=${QUERY}`;
-    const res=await fetch(url)
+    const res=await fetch(url,{
+        next:{
+            revalidate:10,
+        }
+    })
     const data=await res.json();
     return data.result;
 }
