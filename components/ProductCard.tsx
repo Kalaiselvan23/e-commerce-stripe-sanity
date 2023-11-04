@@ -8,18 +8,20 @@ import {MdOutlineCompareArrows} from "react-icons/md"
 import { useToast } from './ui/use-toast';
 import ProductDialog from './ProductDialog';
 import { useRouter } from 'next/navigation'
-import { CartContext, cartContextType } from '@/app/contexts/CartContext';
+import { CartContext, cartContextType, cartItemType } from '@/app/contexts/CartContext';
 const ProductCard = ({ product }: { product: ProductType }) => {
     const router = useRouter()
-    const {cartItems,setCartItems}=useContext(CartContext) as cartContextType
+    const {cartItems,addToCart}=useContext(CartContext) as cartContextType
     const [isLiked,setLike]=useState<boolean>(false);
     const {toast}=useToast();
     const handleAddCart=()=>{
+        const cartItem={...product,count:1}
+        addToCart(cartItem)
         toast({
             title:"Item Added",
             description:`${product.name} is added to your cart`,
         })
-        setCartItems(prev=>[...prev,product])
+       
     }
     const handleLike=()=>{
         setLike((prev)=>!prev);

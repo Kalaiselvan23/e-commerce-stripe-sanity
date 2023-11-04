@@ -21,3 +21,16 @@ type ProductType={
         _createdAt:string,
     }[],
 }
+export type bannerType={
+    _id:string,
+    slider:{
+        description:string,
+        image:{
+            asset:{
+                _ref:string,
+            }
+        },
+        size:"Medium"|"Large"|"Small",
+        buttonText:string,
+    }[]
+}

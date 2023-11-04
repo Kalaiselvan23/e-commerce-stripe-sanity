@@ -2,57 +2,25 @@ import React from 'react'
 import { Button } from './ui/button'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import Image from 'next/image'
-
-const Hero = () => {
+import fetchData from '@/utils/fetchData'
+import { bannerType } from '@/types'
+import { urlFor } from '@/sanity'
+import { url } from 'inspector'
+const Hero = async() => {
+    const banner:bannerType[]=await fetchData(`*[_type=='banner']`)
+    console.log(banner[0].slider)
     return (
-        <main className='grid grid-cols-4 grid-row-3 gap-4'>
-            <div className='text-white relative rounded-lg col-span-3 row-span-2'>
-                <Image src={"/poster.png"} alt={"banner"} className="rounded-xl" fill />
-                <div className='absolute top-1/3 left-10 w-80 flex flex-col gap-3'>
-                    <h3 className="font-bold text-2xl">Galaxy Folding Phone</h3>
-                    <p>Which can very depending on the brand and model electronic device</p>
-                    <Button className='bg-white text-black'>Shop Now <AiOutlineArrowRight /></Button>
-                </div>
-            </div><div className='text-white relative rounded-lg'>
-                <Image src={"/poster.png"} width={700} height={600} alt={"banner"} className="rounded-xl" />
-                <div className='absolute top-0 '>
-                    <h3 className="font-bold text-2xl">Galaxy Folding Phone</h3>
-                    <p>Which can very depending on the brand and model electronic device</p>
-                    <Button>Shop Now <AiOutlineArrowRight /></Button>
+        <main className='grid grid-cols-4 grid-rows-3 gap-3 grid-flow-row'>
+           {banner[0].slider.map(banner=>{
+            let style=banner.size==="Large"?"col-span-3 row-start-1 row-span-2":banner.size==='Small'?'col-span-1':banner.size==="Medium"?"col-span-2":"";
+            return <div key={banner._id} className={`relative rounded-xl ${style}`}>
+                <img src={urlFor(banner.image.asset._ref).url()} className='w-full h-full rounded-lg' alt="banner"/>
+                <div className={'top-1/3 absolute text-white font-bold text-2xl left-10 '} >
+                    <h2>{banner.description}</h2>
+                    <button className='text-lg bg-blue-600 p-2 font-normal rounded-md'>{banner.buttonText}</button>
                 </div>
             </div>
-            <div className='text-white relative rounded-lg'>
-                <Image src={"/poster.png"} width={700} height={600} alt={"banner"} className="rounded-xl" />
-                <div className='absolute top-0 '>
-                    <h3 className="font-bold text-2xl">Galaxy Folding Phone</h3>
-                    <p>Which can very depending on the brand and model electronic device</p>
-                    <Button>Shop Now <AiOutlineArrowRight /></Button>
-                </div>
-            </div>
-            <div className='text-white relative rounded-lg'>
-                <Image src={"/poster.png"} width={700} height={600} alt={"banner"} className="rounded-xl" />
-                <div className='absolute top-0 '>
-                    <h3 className="font-bold text-2xl">Galaxy Folding Phone</h3>
-                    <p>Which can very depending on the brand and model electronic device</p>
-                    <Button>Shop Now <AiOutlineArrowRight /></Button>
-                </div>
-            </div>
-            <div className='text-white relative rounded-lg'>
-                <Image src={"/poster.png"} width={700} height={600} alt={"banner"} className="rounded-xl" />
-                <div className='absolute top-0 '>
-                    <h3 className="font-bold text-2xl">Galaxy Folding Phone</h3>
-                    <p>Which can very depending on the brand and model electronic device</p>
-                    <Button>Shop Now <AiOutlineArrowRight /></Button>
-                </div>
-            </div> 
-            <div className='text-white relative rounded-lg'>
-                <Image src={"/poster.png"} width={700} height={600} alt={"banner"} className="rounded-xl" />
-                <div className='absolute top-0 '>
-                    <h3 className="font-bold text-2xl">Galaxy Folding Phone</h3>
-                    <p>Which can very depending on the brand and model electronic device</p>
-                    <Button>Shop Now <AiOutlineArrowRight /></Button>
-                </div>
-            </div>
+           })}
         </main>
     )
 }
