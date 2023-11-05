@@ -8,7 +8,6 @@ import { urlFor } from '@/sanity'
 import { url } from 'inspector'
 const Hero = async() => {
     const banner:bannerType[]=await fetchData(`*[_type=='banner']`)
-    console.log(banner[0].slider)
     return (
         <main className='grid grid-cols-4 grid-rows-3 gap-3 grid-flow-row'>
            {banner[0].slider.map(banner=>{

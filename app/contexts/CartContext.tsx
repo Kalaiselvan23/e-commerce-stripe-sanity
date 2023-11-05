@@ -17,12 +17,14 @@ export type cartContextType = {
     cartItems: cartItemType[],
     setCartItems: React.Dispatch<React.SetStateAction<cartItemType[]>>,
     addToCart: (product: cartItemType) => void,
+    getSubTotal: () => number,
 };
 
 export const CartContext = createContext<cartContextType>({
     cartItems: [],
     setCartItems: () => { },
     addToCart: () => { },
+    getSubTotal: () => 0,
 });
 
 export const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
@@ -41,9 +43,16 @@ export const CartContextProvider = ({ children }: { children: React.ReactNode })
             }
         });
     }
-
+    const getSubTotal = (): number => {
+        if (cartItems.length > 0) {
+            let total=0;
+            cartItems.forEach(item=>total+=(item.price*item.count))
+            return total;
+        }
+        return 0;
+    }
     return (
-        <CartContext.Provider value={{ cartItems, setCartItems, addToCart }}>
+        <CartContext.Provider value={{ cartItems, setCartItems, addToCart, getSubTotal }}>
             {children}
         </CartContext.Provider>
     );

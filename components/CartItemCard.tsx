@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const CartItemCard = ({product}:{product:cartItemType}) => {
   const {_id,name,price,imageUrls,count}={...product};
-  const [counter,setCounter]=useState<number>(0);
+ 
   return (
     <div className='grid grid-cols-[6rem,auto] grid-rows-2  gap-5 p-2'>
      {imageUrls?<img src={urlFor(imageUrls[0]).url().toString()} className='row-span-2'/>:null}
